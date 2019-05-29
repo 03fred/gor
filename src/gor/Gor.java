@@ -25,9 +25,9 @@ public class Gor {
     public static void main(String[] args) {
         Scanner leia = new Scanner(System.in);
         Cliente acao = new Cliente();
-        Alimento alimento = new Alimento();
+        Alimento acaoAlimento = new Alimento();
         //  ArrayList<Cliente> clientes = new ArrayList<Cliente>();//declaracao do ArrayList
-        ArrayList<Alimento> alimentos = new ArrayList<>();
+        //ArrayList<Alimento> alimentos = new ArrayList<>();
         String nomecliente, emailcliente;
         String tipoCliente, tipoAlimento;
         
@@ -111,8 +111,18 @@ public class Gor {
                                 //cliente.clientes.add(cliente);
                                 break;
                             case 3:
-                                acao.alterarTipo();
-                                acao.setTipoClient(leia.next());
+                                System.out.println("Entre comonumerodocliente que deseja alterar");
+                                int indice =leia.nextInt();
+                                System.out.println("Etre com o tipo de Cliente OMNIVOROUS OU VEGETARIAN");
+                                String tipo =leia.next();
+                                c = acao.tipoCliente(tipo);
+                                while (c == false) {
+                                    System.out.println("Tipo inválido! Escreva OMNIVOROUS ou VEGETARIAN");
+                                    tipo = leia.next();
+                                    c = acao.tipoCliente(tipo);
+                                }
+                                acao.alteratTipoCliente(indice, tipo);
+                                System.out.println("Tipo de Cliente alteradocom Sucesso!");
                                 
                                 break;
                         }
@@ -130,29 +140,54 @@ public class Gor {
                         switch (opc) {
                             case 1: //Visualização
                                 System.out.println("\t\t\t============================= VISUALIZAR ALIMENTOS ===================================");
-                                
+                                acaoAlimento.listarAlimento();
                                 break;
                             case 2:
-                                System.out.println("\t\t\t============================= REGISTAR ALIMENTOS ===================================");
+                               /* System.out.println("\t\t\t============================= REGISTAR ALIMENTOS ===================================");
                                 boolean a;
-                                System.out.println("Entrecomotipo de alimento: ");
+                                System.out.println("Entre comotipo de alimento: ");
                                 alimento.setTipoAlimento(leia.next());
                                 a = alimento.validarAlimento(alimento.getTipoAlimento());
                                 while (a == false) {
                                     System.out.println("Tipo de Alimento Invalido Escreva Agregado ou Simples");
                                     alimento.setTipoAlimento(leia.next());
-                                    a = alimento.validarAlimento(alimento.getTipoAlimento());
+                                    a = alimento.validarAlimento(alimento.getTipoAlimento());                                                                    
                                     
                                 }
+                                if (alimento.getTipoAlimento().equalsIgnoreCase("Simples"))
+                                    System.out.println("Entre com o nome do Alimento Simples");
+                                        alimento.setNome(leia.next());*/
                                 break;
                             case 3:
                                 System.out.println("\t\t\t============================= Registar Alimentos Simples ===================================");
-
+                                    Alimento alimento = new Alimento();
                                 //Instrucoes
+                                boolean al;
+                                System.out.println("Entre com o Tipo de Clinte");
+                                alimento.setTipoAlimento(tipoAlimento = leia.next());
+                                al = alimento.tipoAlimento(alimento.getTipoAlimento());
+                                while (al == false) {
+                                    System.out.println("Tipo inválido! Escreva OMNIVOROUS ou VEGETARIAN");
+                                    alimento.setTipoAlimento(leia.next());
+                                    al = alimento.tipoAlimento(alimento.getTipoAlimento());
+                                }
+                                System.out.println("Entre com nome do Alimento");
+                                alimento.setNome(leia.next());
+                                System.out.println("Entre com As Calorias do Alimento");
+                                alimento.setCalorias(leia.nextFloat());
+                                acaoAlimento.isereAlimento(alimento);
                                 break;
                             case 4:
                                 System.out.println("\t\t\t============================= REGISTAR ALIMENTO AGREGADO ===================================");
-
+                                Alimento alimentoagregado =new Alimento();
+                                System.out.println("Entre com nome do Alimento");
+                                alimentoagregado.setNomeagregado(leia.next());
+                                for(int i =0; alimentoagregado.getPercentagem()==100; i++){
+                                    alimentoagregado.setConstituente(leia.next());
+                                    alimentoagregado.setPercentagem((int) leia.nextFloat());
+                                    //alimentoagregado.setPercentagem()+ i;
+                                
+                                }
                                 //INSTRUCOES
                                 break;
                             case 5:

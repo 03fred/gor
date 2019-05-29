@@ -7,6 +7,7 @@ package gor;
  */
 import java.util.ArrayList;
 import java.util.regex.*;
+import java.util.Scanner;
 public class Cliente {
     protected String email;
     protected  String nome;
@@ -20,11 +21,24 @@ public void inserePessoa(Cliente cliente) {
     clientes.add(cliente);
 }
     public String listarCliente(){
+        if (clientes.size()==0){
+        
+            System.out.println("Lista Vazia, por favor Cadastre Clientes\n");
+        }else{
     for(Cliente view: clientes){
         
     System.out.println(view.getTipoClient() + "|" + view.getNome() + "|" + view.getEmail());
     }
+        }
     return "oi";
+    }
+    public void alteratTipoCliente(int indice, String tipo){
+            for (int i =0; i< clientes.size(); i++){
+    if(clientes.get(i) == clientes.get(indice));
+    clientes.get(i).setTipoClient(tipo);
+    clientes.set(indice, clientes.get(indice));
+    }
+    
     }
  /* public void alterarTipo(int indice){
 
@@ -32,7 +46,7 @@ public void inserePessoa(Cliente cliente) {
 
         clientes.set(indice, tipoClient);
     } 
-}*/
+}
     
   public String alterarTipo() {
 
@@ -45,7 +59,8 @@ public void inserePessoa(Cliente cliente) {
 		clientes.set(posicaoAModificar, cliente);
 	}
 	return null;
-}
+}*/
+    
     public String getEmail() {
         return email;
     }
