@@ -1,21 +1,12 @@
 package gor;
 
-/**
- *
- * @author TAYSON
- */
-import java.io.IOException;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
+import java.io.PrintStream;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Scanner;
-import java.util.ArrayList;
-import java.util.List;
+
+import javax.swing.JOptionPane;
 
 public class Gor {
     
@@ -23,8 +14,10 @@ public class Gor {
     public static Charset codif = StandardCharsets.UTF_8;
     
     public static void main(String[] args) {
-        Scanner leia = new Scanner(System.in);
+    ValidacaoCamposEntrada validacaoCamposEntrada = new ValidacaoCamposEntrada();
+    	Scanner leia = new Scanner(System.in);
         Cliente acao = new Cliente();
+        String str = "";
         Alimento acaoAlimento = new Alimento();
         //  ArrayList<Cliente> clientes = new ArrayList<Cliente>();//declaracao do ArrayList
         //ArrayList<Alimento> alimentos = new ArrayList<>();
@@ -34,13 +27,24 @@ public class Gor {
         int opc = 0;
         try {
             do {
-                System.out.println("\t\t\t============================= MENU PRINCIPAL ===================================");
-                System.out.println("\t\t\t\t1- Criar \t\t\t\t2- Abrir\n\t\t\t\t3- Guardar \t\t\t\t4- Guardar como..."
-                        + "\n\t\t\t\t5- Gestão de Clientes\t\t\t6- Gestão de Alimentos\n\t\t"
-                        + "\t\t7- Gestão de Restaurantes\t\t8- Gestão de Restaurante\n\t\t\t\t9- Sair");
-                System.out.println("\t\t\t================================================================================\n");
-                System.out.print("\t\t\tselecione:");
-                opc = leia.nextInt();
+            	//painel mais limpo para melhor organização
+            	String opcao = JOptionPane.showInputDialog("============================= MENU PRINCIPAL ===================================\");\r\n"
+            			+"1- Criar\n"
+            			+"2- Abrir \n"
+            			+"3- Guardar\n"
+            			+"4- Guardar como...\n"
+            			+"5- Gestão de Clientes \n"
+            			+"6- Gestão de Alimentos\n"
+            			+"7- Gestão de Restaurantes\n"
+            			+"8- Gestão de Restaurante\n"
+            			+"9- Sair ");
+               
+            	try {
+            		
+            		opc = Integer.parseInt(opcao);
+            	}catch(NumberFormatException nb) {
+            		
+            	}
                 
                 switch (opc) {
                     
@@ -160,7 +164,8 @@ public class Gor {
                                 break;
                             case 3:
                                 System.out.println("\t\t\t============================= Registar Alimentos Simples ===================================");
-                                    Alimento alimento = new Alimento();
+                               
+                                Alimento alimento = new Alimento();
                                 //Instrucoes
                                 boolean al;
                                 System.out.println("Entre com o Tipo de Clinte");
@@ -179,17 +184,28 @@ public class Gor {
                                 break;
                             case 4:
                                 System.out.println("\t\t\t============================= REGISTAR ALIMENTO AGREGADO ===================================");
+                               while(true) {
                                 Alimento alimentoagregado =new Alimento();
-                                System.out.println("Entre com nome do Alimento");
+                                
+                                //entrar com o nome do alimento
+                                str = JOptionPane.showInputDialog("entre com o nome do alimento");
+                               //verifica se a string esta vazia
+                                while(validacaoCamposEntrada.validacaoString(str)){
                                 alimentoagregado.setNomeagregado(leia.next());
-                                for(int i =0; alimentoagregado.getPercentagem()==100; i++){
-                                    alimentoagregado.setConstituente(leia.next());
-                                    alimentoagregado.setPercentagem((int) leia.nextFloat());
-                                    //alimentoagregado.setPercentagem()+ i;
                                 
                                 }
-                                //INSTRUCOES
-                                break;
+                                //chama o painel de porcentagem
+                                str = JOptionPane.showInputDialog("entre com a porcentagem");
+                                //método while verifica se o campo contém letras
+                                while(!validacaoCamposEntrada.validacaoDouble(str) && str !=null) {
+                                    alimentoagregado.setPercentagem(leia.nextFloat());
+                                    }
+                                str = JOptionPane.showInputDialog("deseja finalizar o pedido?\n "
+                                		+ "Para finalizar apenas clicke ok");
+                                if(str.isEmpty())System.exit(0);
+                                
+                                }
+                               
                             case 5:
                                 System.out.println("\t\t\t============================= ALTERAR ALIMENTO SIMPLES ===================================");
 

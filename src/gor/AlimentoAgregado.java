@@ -10,20 +10,8 @@ package gor;
  * @author TAYSON
  */
 public class AlimentoAgregado extends Alimento{
- 
-
- /*   public int getCalorias() {
-        return (int) calorias;
-    }*/
-
-    public void setCalorias(int calorias) {
-        this.calorias = calorias;
-    }
- /*public int calcularCalorias(int i, int percentagem){
-     
-     
- return this.calorias = i*percentagem;
- 
- } */
+ public AlimentoAgregado() {
+	 
+ }
     
 }
